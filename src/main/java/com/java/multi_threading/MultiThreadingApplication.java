@@ -19,10 +19,10 @@ public class MultiThreadingApplication {
     }
 
     @Bean
-    public CommandLineRunner run(Assignment2 assignment2) {
+    public CommandLineRunner run(Assignment3 assignment3) {
 
         return args -> {
-            assignment2.getUserReportAsync();
+            assignment3.retryRejectExecutionHandler();
         };
     }
 }
