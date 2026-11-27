@@ -4,19 +4,25 @@ package com.java.multi_threading;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.concurrent.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
-public class MultiThreadingApplication implements CommandLineRunner {
+@EnableAsync
+public class MultiThreadingApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MultiThreadingApplication.class, args);
+
+        SpringApplication.run(
+                MultiThreadingApplication.class, args
+        );
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-        Assignment1 assignment1 = new Assignment1();
-        assignment1.executeTask();
+    @Bean
+    public CommandLineRunner run(Assignment2 assignment2) {
+
+        return args -> {
+            assignment2.getUserReportAsync();
+        };
     }
 }
