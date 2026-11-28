@@ -18,55 +18,33 @@ public class MultiThreadingApplication {
                 MultiThreadingApplication.class, args
         );
 
-        Thread t2 = new Thread(()->{
-            System.out.println("Thread t2 will be terminated");
-        });
+//        OddEvenPrint oddEvenPrint = new OddEvenPrint();
+//
+//        Thread oddThread = new Thread(oddEvenPrint::printOdd, "Odd-Thread");
+//        Thread evenThread = new Thread(oddEvenPrint::printEven, "Even-Thread");
+//
+//        oddThread.start();
+//        System.out.println(oddThread.getName());
+//        evenThread.start();
 
-        t2.start();
+        ParallelExecution parallelExecution = new ParallelExecution();
+        parallelExecution.executorService();
 
-        Thread t1 = new Thread(()->{
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        Thread t1 = new Thread(() ->
+                System.out.println("Task 1 executing")
+        );
 
-        System.out.println(t1.getState());
+        Thread t2 = new Thread(() ->
+                System.out.println("Task 2 executing")
+        );
+
+        Thread t3 = new Thread(() ->
+                System.out.println("Task 3 executing")
+        );
 
         t1.start();
-
-        Thread.sleep(2000);
-        System.out.println(t2.getState());
-        System.out.println(t1.getState());
-        System.out.println("Main will wait: WAITING");
-        t1.join();
-        System.out.println("Main continues");
-        System.out.println(Thread.currentThread().getState());
-
-        Counter c = new Counter();
-
-        Thread c1 = new Thread(()->{
-            try {
-                c.increment();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        Thread c2 = new Thread(()->{
-            try {
-                c.increment();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        });
-
-        c1.start();
-        Thread.sleep(1000);
-        c2.start();
-        Thread.sleep(1000);
-        System.out.println(c2.getState());
-
+        t2.start();
+        t3.start();
     }
 
 }
